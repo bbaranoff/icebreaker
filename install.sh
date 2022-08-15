@@ -47,7 +47,10 @@ cd ..
 git clone https://github.com/osmocom/openbsc
 cd openbsc/openbsc
 autoreconf -fi && ./configure && make -j4 && make install && ldconfig
+cd ../..
 
+cd bsc-2rfa/openbsc
+autoreconf -fi && ./configure && make -j4
 cd ../..
 git clone https://github.com/osmocom/osmo-bts
 cd osmo-bts
