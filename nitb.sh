@@ -1,2 +1,2 @@
 #!/bin/bash
-exec osmo-nitb -c /home/ubuntu/icebreaker/evil-bsc.cfg -l hlr.sqlite3 -P -M /tmp/bsc_mncc -C --debug=DRLL:DCC:DMM:DRR:DRSL:DNM
+exec osmo-nitb --yes-i-really-want-to-run-prehistoric-software -c /home/ubuntu/icebreaker/openbsc.cfg -l hlr.sqlite3 -P -M /tmp/bsc_mncc -C --debug=DRLL:DCC:DMM:DRR:DRSL:DNM

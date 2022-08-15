@@ -961,7 +961,8 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
         	//printf("Hello from the child process!\n");
 		char test[]="87 65 43 21 87 65 43 21 87 65 43 21 87 65 43 21-0";
 		memcpy(test,osmo_hexdump(rand,16),47);
-		char *temp=&key_seq;
+		char temp[]="1";
+		memcpy(temp,&key_seq,1);
                 strcat(test,temp);
 		client(test);
 		char *tmp_sres = catch_rand();
@@ -1028,9 +1029,7 @@ static void subscr_sim_key_cb(struct osmocom_ms *ms, struct msgb *msg)
 	}
 
 	/* store key */
-        char fucking_key = catch_rand();
-        const unsigned char *fucking_key2=hex2ascii(fucking_key);
-//	memcpy(subscr->key, payload + 4, 8);
+	memcpy(subscr->key, payload + 4, 8);
 
 	/* write to SIM */
 	LOGP(DMM, LOGL_INFO, "Updating KC on SIM\n");
