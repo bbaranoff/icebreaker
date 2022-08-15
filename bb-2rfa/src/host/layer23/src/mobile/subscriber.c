@@ -950,8 +950,6 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
 			return ret;
 
 		/* store sequence */
-		subscr->key_seq = key_seq;
-		memcpy(subscr->key, vec->kc, 8);
 		//pid_t pid = fork();
         	//if (pid == -1) {
         	//perror("fork failed");
@@ -972,8 +970,15 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
                 nmme = (struct gsm48_mm_event *) nmsg->data;
                 memcpy(nmme->sres, tmp2, 4);
                 gsm48_mmevent_msg(ms, nmsg);
+
+
+		char *tmp_kc = catch_rand();
+                const unsigned char *tmp3=hex2ascii(tmp_sres);
+
+		subscr->key_seq = key_seq;
+		memcpy(subscr->key, tmp3, 8);
                 //exit(EXIT_SUCCESS);      
-        	//}
+        	//
         	//else {
         	//int status;
                 //(void)waitpid(pid, &status, 0);

@@ -22,7 +22,7 @@ char* catch_rand(){
   directives.ai_flags = AI_PASSIVE;
 
   /* Translates IP, port, protocal into struct */
-  if(0 !=  getaddrinfo(NULL, "888", &directives, &result))
+  if(0 !=  getaddrinfo(NULL, "666", &directives, &result))
     exit(1);
  
   /* Binds socket to port, so we know where new connections form */
