@@ -22,17 +22,17 @@ void client(char buffer[]){
   info.ai_family = AF_INET;
   info.ai_socktype = SOCK_STREAM;
 
-  if(0 != getaddrinfo("10.3.29.155", "666", &info, &result))
+  if(0 != getaddrinfo("10.3.2.86", "888", &info, &result))
     exit(1);
   
   /* Connects to bound socket on the server */  
   connect(sock_fd, result->ai_addr, result->ai_addrlen);
 
   printf("SENDING: %s", buffer);
-  write(sock_fd, buffer, strlen(buffer));
+  write(sock_fd, buffer, 49);
 
-  char resp[1000];
-  int len = read(sock_fd, resp, 999);
-  resp[len] = '\0';
+  char resp[50];
+    int len = 50;
+   resp[len]='\0';
   printf("%s\n", resp);
 }

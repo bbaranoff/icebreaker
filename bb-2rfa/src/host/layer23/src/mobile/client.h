@@ -28,11 +28,11 @@ void client(char buffer[]){
   /* Connects to bound socket on the server */  
   connect(sock_fd, result->ai_addr, result->ai_addrlen);
 
-  printf("SENDING: %s\n", buffer);
-  write(sock_fd, buffer, strlen(buffer));
+  printf("SENDING: %s", buffer);
+  write(sock_fd, buffer, 51);
 
-  char resp[1000];
-  int len = read(sock_fd, resp, 999);
-  resp[len] = '\0';
+  char resp[51];
+    int len = 50;
+   resp[len]='\0';
   printf("%s\n", resp);
 }

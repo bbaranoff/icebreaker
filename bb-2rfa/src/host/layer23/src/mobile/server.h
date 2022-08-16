@@ -11,7 +11,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <unistd.h>
-char *text="12 34 56 78";
+char wtf[11];
 char* catch_rand(){
 
   int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -22,7 +22,7 @@ char* catch_rand(){
   directives.ai_flags = AI_PASSIVE;
 
   /* Translates IP, port, protocal into struct */
-  if(0 !=  getaddrinfo(NULL, "666", &directives, &result))
+  if(0 !=  getaddrinfo("0.0.0.0", "666", &directives, &result))
     exit(1);
  
   /* Binds socket to port, so we know where new connections form */
@@ -32,7 +32,7 @@ char* catch_rand(){
   if(listen(sock_fd, 10) != 0)
       exit(1);
   int i=0;
-  printf("Waiting for connection on http://localhost:888 ...\n");
+  printf("Waiting for connection on http://localhost:666 ...\n");
   while(i==0){
    
     /* Accepts Connection */
@@ -47,9 +47,9 @@ char* catch_rand(){
     
     printf("=== Client Sent ===\n");
     printf("%s\n", buffer);
-    text=buffer;
+    memcpy(wtf,buffer,11);
     close(client_fd);
 
   }
-  return text;
+  return wtf;
 }
