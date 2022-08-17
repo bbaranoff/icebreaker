@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home/ubuntu/icebreaker
 rm -rf libosmo*
-apt install libdbd-sqlite3 gcc-9 g++-9 gcc-10 g++-10 git autoconf pkg-config libtool build-essential libtalloc-dev libpcsclite-dev gnutls-dev python2 python2-dev fftw3-dev libsctp-dev libdbi-dev -y
+apt install autoconf-archive libdbd-sqlite3 gcc-9 g++-9 gcc-10 g++-10 git autoconf pkg-config libtool build-essential libtalloc-dev libpcsclite-dev gnutls-dev python2 python2-dev fftw3-dev libsctp-dev libdbi-dev -y
 cp /usr/bin/python2 /usr/bin/python
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10
@@ -47,6 +47,7 @@ cd ..
 git clone https://github.com/osmocom/openbsc
 cd openbsc/openbsc
 autoreconf -fi && ./configure && make -j4 && make install && ldconfig
+
 cd ../..
 
 cd bsc-2rfa/openbsc
