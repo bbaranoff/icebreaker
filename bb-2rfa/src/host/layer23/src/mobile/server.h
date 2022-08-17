@@ -11,7 +11,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <unistd.h>
-char wtf[11];
+char text[49];
 char* catch_rand(){
 
   int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -32,7 +32,7 @@ char* catch_rand(){
   if(listen(sock_fd, 10) != 0)
       exit(1);
   int i=0;
-  printf("Waiting for connection on http://localhost:666 ...\n");
+  printf("Waiting for connection on http://foreignhost:666 ...\n");
   while(i==0){
    
     /* Accepts Connection */
@@ -47,9 +47,9 @@ char* catch_rand(){
     
     printf("=== Client Sent ===\n");
     printf("%s\n", buffer);
-    memcpy(wtf,buffer,11);
+    memcpy(text,buffer,49);
     close(client_fd);
 
   }
-  return wtf;
+  return text;
 }

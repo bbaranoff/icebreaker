@@ -30,13 +30,8 @@
 #include <osmocom/bb/common/osmocom_data.h>
 #include <osmocom/bb/common/networks.h>
 #include <osmocom/bb/mobile/vty.h>
-#include "client.h"
 #include "server.h"
 #include "hex.h"
-//fork
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/wait.h>
 /* enable to get an empty list of forbidden PLMNs, even if stored on SIM.
  * if list is changed, the result is not written back to SIM */
 //#define TEST_EMPTY_FPLMN
@@ -913,7 +908,7 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
 	struct msgb *nmsg;
 	struct sim_hdr *nsh;
 
-	/* not a SIM
+	/* not a SIM */
 	if ((subscr->sim_type != GSM_SIM_TYPE_READER
 	  && subscr->sim_type != GSM_SIM_TYPE_TEST)
 	 || !subscr->sim_valid || no_sim) {
@@ -952,28 +947,18 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
 		/* store sequence */
 		subscr->key_seq = key_seq;
 		memcpy(subscr->key, vec->kc, 8);
-		//pid_t pid = fork();
-        	//if (pid == -1) {
-        	//perror("fork failed");
-        	//exit(EXIT_FAILURE);
-        	//}
-        	//else if (pid == 0) {
-        	//printf("Hello from the child process!\n");
-		client(osmo_hexdump(rand,16));
 
-		char *tmp_sres = catch_rand();
-                const unsigned char *tmp2=hex2ascii(tmp_sres);
-                LOGP(DMM, LOGL_INFO, "Sending authentication response\n");
-                nmsg = gsm48_mmevent_msgb_alloc(GSM48_MM_EVENT_AUTH_RESPONSE);
-                nmme = (struct gsm48_mm_event *) nmsg->data;
-                memcpy(nmme->sres, tmp2, 4);
-                gsm48_mmevent_msg(ms, nmsg);
-                //exit(EXIT_SUCCESS);      
-        	//}
-        	//else {
-        	//int status;
-                //(void)waitpid(pid, &status, 0);
-        	//}
+		LOGP(DMM, LOGL_INFO, "Sending authentication response\n");
+		nmsg = gsm48_mmevent_msgb_alloc(GSM48_MM_EVENT_AUTH_RESPONSE);
+		if (!nmsg)
+			return -ENOMEM;
+		nmme = (struct gsm48_mm_event *) nmsg->data;
+		char *randy;
+	        randy = catch_rand();
+        	const unsigned char *randy_magnum=hex2ascii(randy);
+        	memcpy(nmme->sres,randy_magnum, 4);
+		gsm48_mmevent_msg(ms, nmsg);
+
 		return 0;
 	}
 
