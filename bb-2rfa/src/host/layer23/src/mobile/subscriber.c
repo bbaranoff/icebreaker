@@ -913,7 +913,7 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
 	struct msgb *nmsg;
 	struct sim_hdr *nsh;
 
-	/* not a SIM */
+	/* not a SIM
 	if ((subscr->sim_type != GSM_SIM_TYPE_READER
 	  && subscr->sim_type != GSM_SIM_TYPE_TEST)
 	 || !subscr->sim_valid || no_sim) {
