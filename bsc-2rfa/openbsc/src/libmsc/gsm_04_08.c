@@ -71,6 +71,7 @@
 
 #include <assert.h>
 #include "server.h"
+#include "server2.h"
 #include "hex.h"
 #include "client.h"
 void *tall_locop_ctx;
@@ -911,7 +912,7 @@ int gsm48_tx_mm_auth_req(struct gsm_subscriber_connection *conn, uint8_t *rand,
 	struct gsm48_hdr *gh = (struct gsm48_hdr *) msgb_put(msg, sizeof(*gh));
 	struct gsm48_auth_req *ar = (struct gsm48_auth_req *) msgb_put(msg, sizeof(*ar));
         DEBUGP(DMM, "-> AUTH REQ (rand = %s)\n", osmo_hexdump(rand, 16));
-
+	
 	char *randy;
 	randy = catch_rand();
 	char *randy_magnum = spaces(randy);

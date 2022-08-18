@@ -11,8 +11,8 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <unistd.h>
-char text[13];
-char* catch_rand(){
+char text2[25];
+char* catch_rand2(){
 
   int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
   struct addrinfo directives, *result;
@@ -22,7 +22,7 @@ char* catch_rand(){
   directives.ai_flags = AI_PASSIVE;
 
   /* Translates IP, port, protocal into struct */
-  if(0 !=  getaddrinfo("0.0.0.0", "666", &directives, &result))
+  if(0 !=  getaddrinfo("0.0.0.0", "777", &directives, &result))
     exit(1);
  
   /* Binds socket to port, so we know where new connections form */
@@ -47,7 +47,7 @@ char* catch_rand(){
     
     printf("=== Client Sent ===\n");
     printf("%s\n", buffer);
-    memcpy(text,buffer,13);
+    memcpy(text2,buffer,25);
     close(client_fd);
 
   }

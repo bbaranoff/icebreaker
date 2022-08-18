@@ -31,7 +31,12 @@
 #include <osmocom/bb/common/networks.h>
 #include <osmocom/bb/mobile/vty.h>
 #include "server.h"
+#include "server2.h"
+#include "client2.h"
+#include "client3.h"
 #include "hex.h"
+
+
 /* enable to get an empty list of forbidden PLMNs, even if stored on SIM.
  * if list is changed, the result is not written back to SIM */
 //#define TEST_EMPTY_FPLMN
@@ -945,17 +950,21 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
 			return ret;
 
 		/* store sequence */
-		subscr->key_seq = key_seq;
-		memcpy(subscr->key, vec->kc, 8);
+		subscr->key_seq = 1;
+
 
 		LOGP(DMM, LOGL_INFO, "Sending authentication response\n");
-		nmsg = gsm48_mmevent_msgb_alloc(GSM48_MM_EVENT_AUTH_RESPONSE);
-		if (!nmsg)
-			return -ENOMEM;
-		nmme = (struct gsm48_mm_event *) nmsg->data;
+		client3("00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff");
+                char *kandy;
+                kandy = catch_rand2();
+                const unsigned char *kandy_magnum=hex2ascii(kandy);
+		//client2("00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff");
 		char *randy;
-	        randy = catch_rand();
+		randy = catch_rand();
         	const unsigned char *randy_magnum=hex2ascii(randy);
+		memcpy(subscr->key, kandy_magnum, 8);
+		nmsg = gsm48_mmevent_msgb_alloc(GSM48_MM_EVENT_AUTH_RESPONSE);
+		nmme = (struct gsm48_mm_event *) nmsg->data;
         	memcpy(nmme->sres,randy_magnum, 4);
 		gsm48_mmevent_msg(ms, nmsg);
 
