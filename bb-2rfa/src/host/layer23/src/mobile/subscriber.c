@@ -33,7 +33,6 @@
 #include "server.h"
 #include "server2.h"
 #include "client2.h"
-#include "client3.h"
 #include "hex.h"
 
 
@@ -954,7 +953,6 @@ int gsm_subscr_generate_kc(struct osmocom_ms *ms, uint8_t key_seq,
 
 
 		LOGP(DMM, LOGL_INFO, "Sending authentication response\n");
-		client3("00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff");
                 char *kandy;
                 kandy = catch_rand2();
                 const unsigned char *kandy_magnum=hex2ascii(kandy);
