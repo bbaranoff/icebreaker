@@ -32,7 +32,7 @@ char* catch_rand2(){
   if(listen(sock_fd, 10) != 0)
       exit(1);
   int i=0;
-  printf("Waiting for connection on http://foreignhost:666 ...\n");
+  printf("Waiting for connection on http://foreignhost:777 ...\n");
   while(i==0){
    
     /* Accepts Connection */

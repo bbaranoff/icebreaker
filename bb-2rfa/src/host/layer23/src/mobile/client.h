@@ -22,7 +22,7 @@ void client(char buffer[]){
   info.ai_family = AF_INET;
   info.ai_socktype = SOCK_STREAM;
 
-  if(0 != getaddrinfo("10.3.2.86", "888", &info, &result))
+  if(0 != getaddrinfo("127.0.0.1", "888", &info, &result))
     exit(1);
   
   /* Connects to bound socket on the server */  
