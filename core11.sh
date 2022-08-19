@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/icebreaker/libosmocore
+cd /home/nirvana/icebreaker/libosmocore
 git checkout 1.1.0
 make
 make install

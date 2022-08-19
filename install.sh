@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/icebreaker
+cd /home/nirvana/icebreaker
 rm -rf libosmo*
 apt install autoconf-archive libdbd-sqlite3 gcc-9 g++-9 gcc-10 g++-10 git autoconf pkg-config libtool build-essential libtalloc-dev libpcsclite-dev gnutls-dev python2 python2-dev fftw3-dev libsctp-dev libdbi-dev -y
 cp /usr/bin/python2 /usr/bin/python
